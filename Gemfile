@@ -13,3 +13,8 @@ gem 'therubyracer', require: 'v8'
 gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2'
+
+
+group :test, :development do
+  gem 'rspec-rails', '~> 3.0.0.rc1'
+end

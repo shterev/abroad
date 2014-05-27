@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  describe 'GET index' do
+  describe "GET index" do
     it "gets a list of all users" do
       allow(User).to receive(:all)
 
@@ -19,7 +19,7 @@ describe UsersController do
     end
   end
 
-  describe 'GET show' do
+  describe "GET show" do
     it "searches for the user by id" do
       allow(User).to receive(:find)
 
@@ -37,7 +37,7 @@ describe UsersController do
     end
   end
 
-  describe 'POST create' do
+  describe "POST create" do
     it "creates a new user from the given params" do
       allow(User).to receive(:create)
 
@@ -55,7 +55,7 @@ describe UsersController do
     end
   end
 
-  describe 'PATCH update' do
+  describe "PATCH update" do
     let(:user) { double 'user', update_attributes: nil }
 
     it "searches for the user by id" do
@@ -84,7 +84,7 @@ describe UsersController do
     end
   end
 
-  describe 'DELETE destroy' do
+  describe "DELETE destroy" do
     let(:user) { double 'user', destroy: nil }
 
     it "searches for the user by id" do

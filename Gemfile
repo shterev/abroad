@@ -14,6 +14,8 @@ gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2'
 
+gem 'carrierwave', '~> 0.10.0'
+
 
 group :test, :development do
   gem 'rspec-rails', '~> 3.0.0.rc1'

@@ -12,12 +12,10 @@ describe UsersController do
 
     it "responds with the users" do
       allow(User).to receive(:all).and_return('users')
-      allow(controller).to receive(:respond_with)
-      allow(controller).to receive(:render)
 
       get :index, format: :json
 
-      expect(controller).to have_received(:respond_with).with('users')
+      expect(controller).to respond_with('users')
     end
   end
 
@@ -32,12 +30,10 @@ describe UsersController do
 
     it "responds with the user" do
       allow(User).to receive(:find).with('1').and_return('user')
-      allow(controller).to receive(:respond_with)
-      allow(controller).to receive(:render)
 
       get :show, format: :json, id: '1'
 
-      expect(controller).to have_received(:respond_with).with('user')
+      expect(controller).to respond_with('user')
     end
   end
 
@@ -52,12 +48,10 @@ describe UsersController do
 
     it "responds with the created user" do
       allow(User).to receive(:create).and_return('user')
-      allow(controller).to receive(:respond_with)
-      allow(controller).to receive(:render)
 
       post :create, valid_user_params.merge(format: :json)
 
-      expect(controller).to have_received(:respond_with).with('user', location: nil)
+      expect(controller).to respond_with('user', location: nil)
     end
   end
 
@@ -83,12 +77,10 @@ describe UsersController do
 
     it "responds with the updated user" do
       allow(User).to receive(:find).with('1').and_return(user)
-      allow(controller).to receive(:respond_with)
-      allow(controller).to receive(:render)
 
       patch :update, valid_user_params.merge(format: :json, id: '1')
 
-      expect(controller).to have_received(:respond_with).with(user)
+      expect(controller).to respond_with(user)
     end
   end
 
@@ -113,12 +105,10 @@ describe UsersController do
 
     it "responds with the destroyed user" do
       allow(User).to receive(:find).with('1').and_return(user)
-      allow(controller).to receive(:respond_with)
-      allow(controller).to receive(:render)
 
       delete :destroy, format: :json, id: '1'
 
-      expect(controller).to have_received(:respond_with).with(user)
+      expect(controller).to respond_with(user)
     end
   end
 

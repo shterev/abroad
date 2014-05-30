@@ -1,4 +1,4 @@
 Abroad::Application.routes.draw do
-  resources :users, only: %i(index show create update destroy)
-  resources :events, only: %i(index show create update destroy)
+  resources :users, except: %i(new edit)
+  resources :events, except: %i(new edit)
 end

@@ -1,4 +1,6 @@
 Abroad::Application.routes.draw do
-  resources :users, except: %i(new edit)
-  resources :events, except: %i(new edit)
+  scope constraints: {format: :json} do
+    resources :users, except: %i(new edit)
+    resources :events, except: %i(new edit)
+  end
 end

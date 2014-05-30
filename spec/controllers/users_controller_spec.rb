@@ -5,7 +5,7 @@ describe UsersController do
     it "gets a list of all users" do
       allow(User).to receive(:all)
 
-      get :index, format: :json
+      get :index
 
       expect(User).to have_received(:all)
     end
@@ -13,7 +13,7 @@ describe UsersController do
     it "responds with the users" do
       allow(User).to receive(:all).and_return('users')
 
-      get :index, format: :json
+      get :index
 
       expect(controller).to respond_with('users')
     end
@@ -23,7 +23,7 @@ describe UsersController do
     it "searches for the user by id" do
       allow(User).to receive(:find)
 
-      get :show, format: :json, id: '1'
+      get :show, id: '1'
 
       expect(User).to have_received(:find).with('1')
     end
@@ -31,7 +31,7 @@ describe UsersController do
     it "responds with the user" do
       allow(User).to receive(:find).and_return('user')
 
-      get :show, format: :json, id: '1'
+      get :show, id: '1'
 
       expect(controller).to respond_with('user')
     end
@@ -41,7 +41,7 @@ describe UsersController do
     it "creates a new user from the given params" do
       allow(User).to receive(:create)
 
-      post :create, valid_user_params.merge(format: :json)
+      post :create, valid_user_params
 
       expect(User).to have_received(:create).with(valid_user_params)
     end
@@ -49,7 +49,7 @@ describe UsersController do
     it "responds with the created user" do
       allow(User).to receive(:create).and_return('user')
 
-      post :create, valid_user_params.merge(format: :json)
+      post :create, valid_user_params
 
       expect(controller).to respond_with('user', location: nil)
     end
@@ -63,20 +63,20 @@ describe UsersController do
     end
 
     it "searches for the user by id" do
-      patch :update, valid_user_params.merge(format: :json, id: '1')
+      patch :update, valid_user_params.merge(id: '1')
       expect(User).to have_received(:find).with('1')
     end
 
     it "updates the user by the given attributes" do
       allow(user).to receive(:update_attributes)
 
-      patch :update, valid_user_params.merge(format: :json, id: '1')
+      patch :update, valid_user_params.merge(id: '1')
 
       expect(user).to have_received(:update_attributes).with(valid_user_params)
     end
 
     it "responds with the updated user" do
-      patch :update, valid_user_params.merge(format: :json, id: '1')
+      patch :update, valid_user_params.merge(id: '1')
       expect(controller).to respond_with(user)
     end
   end
@@ -87,7 +87,7 @@ describe UsersController do
     it "searches for the user by id" do
       allow(User).to receive(:find).and_return(user)
 
-      delete :destroy, format: :json, id: '1'
+      delete :destroy, id: '1'
 
       expect(User).to have_received(:find).with('1')
     end
@@ -95,7 +95,7 @@ describe UsersController do
     it "destroys the user" do
       allow(User).to receive(:find).and_return(user)
 
-      delete :destroy, format: :json, id: '1'
+      delete :destroy, id: '1'
 
       expect(user).to have_received(:destroy)
     end
@@ -103,7 +103,7 @@ describe UsersController do
     it "responds with the destroyed user" do
       allow(User).to receive(:find).with('1').and_return(user)
 
-      delete :destroy, format: :json, id: '1'
+      delete :destroy, id: '1'
 
       expect(controller).to respond_with(user)
     end

@@ -84,27 +84,22 @@ describe EventsController do
   describe "DELETE destroy" do
     let(:event) { double 'event', destroy: nil }
 
-    it "searches for the event by id" do
+    before do
       allow(Event).to receive(:find).and_return(event)
+    end
 
+    it "searches for the event by id" do
       delete :destroy, id: '1'
-
       expect(Event).to have_received(:find).with('1')
     end
 
     it "destroys the event" do
-      allow(Event).to receive(:find).and_return(event)
-
       delete :destroy, id: '1'
-
       expect(event).to have_received(:destroy)
     end
 
     it "responds with the destroyed event" do
-      allow(Event).to receive(:find).with('1').and_return(event)
-
       delete :destroy, id: '1'
-
       expect(controller).to respond_with(event)
     end
   end

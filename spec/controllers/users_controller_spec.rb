@@ -84,27 +84,22 @@ describe UsersController do
   describe "DELETE destroy" do
     let(:user) { double 'user', destroy: nil }
 
-    it "searches for the user by id" do
+    before do
       allow(User).to receive(:find).and_return(user)
+    end
 
+    it "searches for the user by id" do
       delete :destroy, id: '1'
-
       expect(User).to have_received(:find).with('1')
     end
 
     it "destroys the user" do
-      allow(User).to receive(:find).and_return(user)
-
       delete :destroy, id: '1'
-
       expect(user).to have_received(:destroy)
     end
 
     it "responds with the destroyed user" do
-      allow(User).to receive(:find).with('1').and_return(user)
-
       delete :destroy, id: '1'
-
       expect(controller).to respond_with(user)
     end
   end

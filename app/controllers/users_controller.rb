@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find params[:id]
+    user = find_user
     respond_with user
   end
 
@@ -15,14 +15,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find params[:id]
+    user = find_user
     user.update_attributes user_params
 
     respond_with user
   end
 
   def destroy
-    user = User.find params[:id]
+    user = find_user
     user.destroy
 
     respond_with user
@@ -32,5 +32,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:first_name, :last_name, :birthday, :color)
+  end
+
+  def find_user
+    User.find params[:id]
   end
 end

@@ -29,7 +29,7 @@ describe UsersController do
     end
 
     it "responds with the user" do
-      allow(User).to receive(:find).with('1').and_return('user')
+      allow(User).to receive(:find).and_return('user')
 
       get :show, format: :json, id: '1'
 
@@ -58,16 +58,16 @@ describe UsersController do
   describe "PATCH update" do
     let(:user) { double 'user', update_attributes: nil }
 
-    it "searches for the user by id" do
+    before do
       allow(User).to receive(:find).and_return(user)
+    end
 
+    it "searches for the user by id" do
       patch :update, valid_user_params.merge(format: :json, id: '1')
-
       expect(User).to have_received(:find).with('1')
     end
 
     it "updates the user by the given attributes" do
-      allow(User).to receive(:find).with('1').and_return(user)
       allow(user).to receive(:update_attributes)
 
       patch :update, valid_user_params.merge(format: :json, id: '1')
@@ -76,10 +76,7 @@ describe UsersController do
     end
 
     it "responds with the updated user" do
-      allow(User).to receive(:find).with('1').and_return(user)
-
       patch :update, valid_user_params.merge(format: :json, id: '1')
-
       expect(controller).to respond_with(user)
     end
   end

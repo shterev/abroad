@@ -43,8 +43,8 @@ describe ParticipationsController do
 
   def valid_participations_params
     {
-      user_id: 'Holiday',
-      event_id: 'Description',
+      user_id: '1',
+      event_id: '1',
     }
   end
 end
